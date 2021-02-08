@@ -12,6 +12,8 @@ export class LessonFormComponent implements OnInit {
     members: [''],
   };
 
+  isAddActive = true;
+
   constructor(private storage: StorageService) {}
 
   ngOnInit(): void {
@@ -28,12 +30,16 @@ export class LessonFormComponent implements OnInit {
     if (this.checkMembers()) {
       this.form.members.push('');
     }
+
+    if (this.checkMembersCount(this.form.members, 11)) {
+      this.isAddActive = false;
+    }
   }
 
   checkMembers() {
     let members = this.form.members.concat();
 
-    if (members.length > 10) {
+    if (this.checkMembersCount(members, 11)) {
       return false;
     }
 
@@ -42,5 +48,13 @@ export class LessonFormComponent implements OnInit {
     }
 
     return true;
+  }
+
+  checkMembersCount(membersArr, validCount) {
+    if (membersArr.length > validCount - 1) {
+      return true;
+    }
+
+    return false;
   }
 }
