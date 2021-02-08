@@ -1,0 +1,39 @@
+<mat-card class="card d-flex flex-column">
+  <mat-card-title class="mat-headline text-center"
+    >Карточка занятия</mat-card-title
+  >
+  <mat-card-content>
+    <form class="example-form">
+      <div class="card__data d-flex justify-content-around">
+        <mat-form-field class="example-full-width">
+          <mat-label>Время занятия</mat-label>
+          <input matInput [value]="form.time" />
+        </mat-form-field>
+      </div>
+
+      <p class="mat-subheading-2 mb-0 text-center">Участники</p>
+      <div class="card__members d-flex flex-wrap justify-content-around">
+        <mat-form-field
+          class="example-full-width"
+          *ngFor="let surname of form.members; let i = index"
+        >
+          <mat-label>Участник {{ i + 1 }}</mat-label>
+          <input
+            matInput
+            [value]="surname"
+            (change)="changeValueHandler($event, i)"
+          />
+        </mat-form-field>
+
+        <button mat-button color="accent" (click)="addMemberHandler()">
+          <mat-icon>add_circle</mat-icon>
+          <span class="ml-1">Добавить участника</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-between mb-1">
+    <button mat-raised-button>Назад</button>
+    <button mat-raised-button color="primary">Сохранить</button>
+  </mat-card-actions>
+</mat-card>

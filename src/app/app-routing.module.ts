@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SheduleComponent } from './shedule/shedule.component';
+import { LessonFormComponent } from './lesson-form/lesson-form.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'shedule', component: SheduleComponent },
+  { path: 'lesson/:id', component: LessonFormComponent },
+  { path: '', redirectTo: '/shedule', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

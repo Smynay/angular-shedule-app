@@ -1,0 +1,23 @@
+.card {
+  min-width: 300px;
+
+  &__table {
+    display: flex;
+    align-items: center;
+  }
+
+  &__time {
+    font-weight: bold;
+    font-size: 1.5rem;
+    flex-basis: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
