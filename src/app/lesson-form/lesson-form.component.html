@@ -7,7 +7,12 @@
       <div class="card__data d-flex justify-content-around">
         <mat-form-field class="example-full-width">
           <mat-label>Время занятия</mat-label>
-          <input matInput [value]="form.time" />
+          <input
+            matInput
+            [value]="form.time"
+            (change)="changeTimeHandler($event)"
+            required
+          />
         </mat-form-field>
       </div>
 

@@ -20,6 +20,10 @@ export class LessonFormComponent implements OnInit {
     this.form = this.storage.getStorage();
   }
 
+  changeTimeHandler({ target }) {
+    this.form.time = target.value;
+  }
+
   changeValueHandler({ target }, id) {
     this.form.members[id] = target.value;
   }
