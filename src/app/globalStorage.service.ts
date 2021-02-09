@@ -1,30 +1,40 @@
 import { Injectable } from '@angular/core';
-import { ILesson } from './types/types';
+import { ILesson, IColumn } from './types/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalStorageService {
-  _storage: ILesson[] = [
+  _lessonsStorage: ILesson[] = [
     { time: '16:20', members: ['Anna', 'Boris', 'Clement'] },
     { time: '16:20', members: ['Demian', 'Erick', 'Fedor'] },
     { time: '16:20', members: ['George', 'Harold', 'Shindler'] },
   ];
 
-  getStorage() {
-    return this._storage;
+  _columnsStorage: IColumn[] = [
+    { title: 'Понедельник', cardsIndexes: [0, 1, 2] },
+    { title: 'Вторник', cardsIndexes: [2, 1, 1] },
+    { title: 'Среда', cardsIndexes: [2, 1, 2] },
+  ];
+
+  getColumnsStorage() {
+    return this._columnsStorage;
+  }
+
+  // Mb should delete this?
+  getLessonsStorage() {
+    return this._lessonsStorage;
   }
 
   getLessonCardByIndex(index) {
-    return this._storage[index];
+    return this._lessonsStorage[index];
   }
 
   setStorage(value) {
-    this._storage = value;
+    this._lessonsStorage = value;
   }
 
   setLessonCardByIndex(index, value) {
-    this._storage[index] = value;
-    console.log(this._storage, value);
+    this._lessonsStorage[index] = value;
   }
 }

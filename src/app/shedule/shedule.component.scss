@@ -6,4 +6,12 @@
   &__wrapper {
     overflow-x: auto;
   }
+
+  &__column {
+    margin-left: 2rem;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
 }

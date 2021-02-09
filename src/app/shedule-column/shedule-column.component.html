@@ -5,8 +5,11 @@
 
   <div
     class="column__item"
-    *ngFor="let card of columnData.cardsData; let i = index"
+    *ngFor="let cardIndex of columnData.cardsIndexes; let i = index"
   >
-    <app-lesson-card [cardData]="card" [cardIndex]="i"></app-lesson-card>
+    <app-lesson-card
+      [cardData]="cardsData[i]"
+      [cardIndex]="cardIndex"
+    ></app-lesson-card>
   </div>
 </div>

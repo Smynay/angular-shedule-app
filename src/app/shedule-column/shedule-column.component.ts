@@ -1,3 +1,4 @@
+import { GlobalStorageService } from './../globalStorage.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { IColumn } from './../types/types';
@@ -10,7 +11,13 @@ import { IColumn } from './../types/types';
 export class SheduleColumnComponent implements OnInit {
   @Input() columnData: IColumn;
 
-  constructor() {}
+  cardsData;
 
-  ngOnInit(): void {}
+  constructor(private _storage: GlobalStorageService) {}
+
+  ngOnInit(): void {
+    this.cardsData = this.columnData.cardsIndexes.map((index) =>
+      this._storage.getLessonCardByIndex(index)
+    );
+  }
 }

@@ -5,5 +5,5 @@ export interface ILesson {
 
 export interface IColumn {
   title: string;
-  cardsData: ILesson[];
+  cardsIndexes: number[];
 }

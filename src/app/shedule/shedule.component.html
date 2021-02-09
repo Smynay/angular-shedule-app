@@ -2,7 +2,11 @@
   <div class="board__bar"><h1 class="text-center">Расписание</h1></div>
   <div class="board__wrapper d-flex flex-grow-1">
     <div class="board__columns d-flex flex-grow-1">
-      <app-shedule-column [columnData]="firstColumn"></app-shedule-column>
+      <app-shedule-column
+        class="board__column"
+        *ngFor="let columnData of columnsData"
+        [columnData]="columnData"
+      ></app-shedule-column>
     </div>
   </div>
 </div>
