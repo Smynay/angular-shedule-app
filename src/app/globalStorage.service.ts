@@ -15,6 +15,10 @@ export class GlobalStorageService {
     return this._storage;
   }
 
+  getLessonCardByIndex(index) {
+    return this._storage[index];
+  }
+
   setStorage(value) {
     this._storage = value;
   }
