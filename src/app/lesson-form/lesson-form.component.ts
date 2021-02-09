@@ -27,7 +27,7 @@ export class LessonFormComponent implements OnInit {
     this.form = this._storage.getLessonCardByIndex(this.lessonId);
   }
 
-  backClicked() {
+  backClickHandler() {
     this._location.back();
   }
 
