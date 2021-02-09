@@ -15,4 +15,9 @@ export class SheduleComponent implements OnInit {
   ngOnInit(): void {
     this.columnsData = this._storage.getColumnsStorage();
   }
+
+  addColumnHandler(){
+    const columnTitle = prompt('Введите название колонки');
+    this._storage.createNewColumn(columnTitle || 'без названия');
+  }
 }

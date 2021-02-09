@@ -8,10 +8,8 @@
         [columnData]="columnData"
         [columnIndex]="i"
       ></app-shedule-column>
-      <div
-        class="board__column d-flex align-items-center justify-content-around"
-      >
-        <button mat-button color="accent">
+      <div class="board__column d-flex align-items-center justify-content-around">
+        <button mat-button color="accent" (click)="addColumnHandler()">
           <mat-icon>add_circle</mat-icon>
           <span class="ml-1">Добавить колонку</span>
         </button>

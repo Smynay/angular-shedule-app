@@ -24,6 +24,12 @@ export class GlobalStorageService {
     return currentCardIndex;
   }
 
+  createNewColumn(title){
+    if(this._columnsStorage.length < 7){
+      this._columnsStorage.push({title, cardsIndexes: []})
+    }
+  }
+
   getColumnsStorage() {
     return this._columnsStorage;
   }
