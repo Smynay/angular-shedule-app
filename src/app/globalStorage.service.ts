@@ -6,9 +6,9 @@ import { ILesson } from './types/types';
 })
 export class GlobalStorageService {
   _storage: ILesson[] = [
-    { time: '16:20', members: ['Haxlet', 'Founfer', 'Shindler'] },
-    { time: '16:20', members: ['Haxlet', 'Founfer', 'Shindler'] },
-    { time: '16:20', members: ['Haxlet', 'Founfer', 'Shindler'] },
+    { time: '16:20', members: ['Anna', 'Boris', 'Clement'] },
+    { time: '16:20', members: ['Demian', 'Erick', 'Fedor'] },
+    { time: '16:20', members: ['George', 'Harold', 'Shindler'] },
   ];
 
   getStorage() {
