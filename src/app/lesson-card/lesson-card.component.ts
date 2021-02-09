@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-interface ICardData {
-  time: string;
-  surnames: string[];
-}
+import { ILesson } from '../types/types';
 
 @Component({
   selector: 'app-lesson-card',
@@ -11,7 +7,7 @@ interface ICardData {
   styleUrls: ['./lesson-card.component.scss'],
 })
 export class LessonCardComponent implements OnInit {
-  @Input() cardData: ICardData;
+  @Input() cardData: ILesson;
 
   ngOnInit(): void {
     console.log(this.cardData);

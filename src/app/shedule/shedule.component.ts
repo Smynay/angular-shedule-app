@@ -1,4 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GlobalStorageService } from '../globalStorage.service';
 
 @Component({
   selector: 'app-shedule',
@@ -6,23 +7,11 @@ import { Component, OnInit, NgModule } from '@angular/core';
   styleUrls: ['./shedule.component.scss'],
 })
 export class SheduleComponent implements OnInit {
-  cardData = [
-    {
-      time: '16:20',
-      surnames: [
-        'Лебовски',
-        'Питчер',
-        'Паркер',
-        'Иванов',
-        'Рукра',
-        'Зорев',
-        'Кумеш',
-        'Степанов',
-      ],
-    },
-  ];
+  cardsData;
 
-  constructor() {}
+  constructor(private storage: GlobalStorageService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cardsData = this.storage.getStorage();
+  }
 }

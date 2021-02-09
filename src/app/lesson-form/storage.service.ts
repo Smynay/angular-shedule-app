@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface ILesson {
-  time: string;
-  members: string[];
-}
+import { ILesson } from '../types/types';
 
 @Injectable({
   providedIn: 'root',
