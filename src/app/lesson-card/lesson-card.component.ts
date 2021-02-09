@@ -8,6 +8,7 @@ import { ILesson } from '../types/types';
 })
 export class LessonCardComponent implements OnInit {
   @Input() cardData: ILesson;
+  @Input() cardIndex: number;
 
   ngOnInit(): void {
     console.log(this.cardData);

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from './storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { GlobalStorageService } from '../globalStorage.service';
+import { ILesson } from '../types/types';
 
 @Component({
   selector: 'app-lesson-form',
@@ -7,17 +11,24 @@ import { StorageService } from './storage.service';
   styleUrls: ['./lesson-form.component.scss'],
 })
 export class LessonFormComponent implements OnInit {
-  form = {
-    time: '',
-    members: [''],
-  };
+  form: ILesson;
+  lessonId: number;
+  isAddActive: boolean = true;
 
-  isAddActive = true;
-
-  constructor(private storage: StorageService) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _location: Location,
+    private _storage: GlobalStorageService
+  ) {}
 
   ngOnInit(): void {
-    this.form = this.storage.getStorage();
+    this._route.params.subscribe((params) => (this.lessonId = params.id));
+    this.form = this._storage.getLessonCardByIndex(this.lessonId);
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   changeTimeHandler({ target }) {

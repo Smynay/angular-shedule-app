@@ -2,8 +2,9 @@
 <mat-grid-list cols="2">
   <mat-grid-tile>
     <app-lesson-card
-      *ngFor="let card of cardsData"
+      *ngFor="let card of cardsData; let i = index"
       [cardData]="card"
+      [cardIndex]="i"
     ></app-lesson-card>
   </mat-grid-tile>
   <mat-grid-tile>Add</mat-grid-tile>
