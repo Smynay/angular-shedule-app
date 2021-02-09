@@ -7,9 +7,9 @@
       </ol>
     </div>
     <div class="card__actions">
-      <a href="lesson/{{ cardIndex }}">
-        <button mat-raised-button color="primary">Редактировать</button>
-      </a>
+      <button mat-raised-button color="primary" (click)="editClickHandler()">
+        Редактировать
+      </button>
     </div>
   </mat-card-content>
 </mat-card>
