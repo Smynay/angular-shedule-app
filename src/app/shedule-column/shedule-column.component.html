@@ -1,0 +1,12 @@
+<div class="column">
+  <div class="column__title">
+    <h2 class="mat-subheading-2 text-center">{{ columnData.title }}</h2>
+  </div>
+
+  <div
+    class="column__item"
+    *ngFor="let card of columnData.cardsData; let i = index"
+  >
+    <app-lesson-card [cardData]="card" [cardIndex]="i"></app-lesson-card>
+  </div>
+</div>

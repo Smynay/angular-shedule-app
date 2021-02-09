@@ -10,6 +10,7 @@ import { LessonCardComponent } from './lesson-card/lesson-card.component';
 import { SheduleComponent } from './shedule/shedule.component';
 import { LessonFormComponent } from './lesson-form/lesson-form.component';
 import { MatButtonModule } from '@angular/material/button';
+import { SheduleColumnComponent } from './shedule-column/shedule-column.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
     LessonCardComponent,
     SheduleComponent,
     LessonFormComponent,
+    SheduleColumnComponent,
   ],
   imports: [
     BrowserModule,

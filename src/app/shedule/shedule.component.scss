@@ -1,0 +1,9 @@
+.board {
+  &__bar {
+    padding: 1rem;
+  }
+
+  &__wrapper {
+    overflow-x: auto;
+  }
+}
