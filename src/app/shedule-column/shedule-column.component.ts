@@ -32,4 +32,16 @@ export class SheduleColumnComponent implements OnInit {
       this._storage.createNewLessonCard(this.columnIndex),
     ]);
   }
+
+  editColumnTitleHandler(){
+    if(prompt('Введите заголовок колонки')){
+      //TODO: изменить заголовок колонки
+    }
+  }
+
+  deleteColumnHandler(){
+    if(confirm('Действительно удалить колонку?')){
+      //TODO: удалить колонку
+    }
+  }
 }
