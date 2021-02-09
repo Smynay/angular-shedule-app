@@ -1,4 +1,6 @@
 .board {
+  height: 100%;
+
   &__bar {
     padding: 1rem;
   }
@@ -9,6 +11,8 @@
 
   &__column {
     margin-left: 2rem;
+    max-height: 100%;
+    overflow-y: auto;
 
     &:first-child {
       margin: 0;

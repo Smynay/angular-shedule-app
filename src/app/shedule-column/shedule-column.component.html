@@ -2,15 +2,16 @@
   <div class="column__title">
     <h2 class="mat-subheading-2 text-center">{{ columnData.title }}</h2>
   </div>
-
-  <div
-    class="column__item"
-    *ngFor="let cardIndex of columnData.cardsIndexes; let i = index"
-  >
-    <app-lesson-card
-      [cardData]="cardsData[i]"
-      [cardIndex]="cardIndex"
-    ></app-lesson-card>
+  <div class="column__list">
+    <div
+      class="column__item"
+      *ngFor="let cardIndex of columnData.cardsIndexes; let i = index"
+    >
+      <app-lesson-card
+        [cardData]="cardsData[i]"
+        [cardIndex]="cardIndex"
+      ></app-lesson-card>
+    </div>
   </div>
 
   <button
