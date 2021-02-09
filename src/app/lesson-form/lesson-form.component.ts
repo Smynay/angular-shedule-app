@@ -31,6 +31,11 @@ export class LessonFormComponent implements OnInit {
     this._location.back();
   }
 
+  saveClickHandler() {
+    this._storage.setLessonCardByIndex(this.lessonId, this.form);
+    this._router.navigate(['/shedule']);
+  }
+
   changeTimeHandler({ target }) {
     this.form.time = target.value;
   }

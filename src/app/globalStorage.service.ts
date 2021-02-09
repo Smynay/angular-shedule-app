@@ -22,4 +22,9 @@ export class GlobalStorageService {
   setStorage(value) {
     this._storage = value;
   }
+
+  setLessonCardByIndex(index, value) {
+    this._storage[index] = value;
+    console.log(this._storage, value);
+  }
 }
