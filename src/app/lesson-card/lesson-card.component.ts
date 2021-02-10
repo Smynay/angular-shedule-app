@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ILesson } from '../types/types';
@@ -12,6 +12,9 @@ import { GlobalStorageService } from './../globalStorage.service';
 export class LessonCardComponent implements OnInit {
   @Input() cardData: ILesson;
   @Input() cardIndex: number;
+  @Input() columnIndex: number;
+
+  @Output() onCardDeleted = new EventEmitter();
 
   constructor(private _router: Router, private _storage: GlobalStorageService) {}
 
@@ -24,9 +27,8 @@ export class LessonCardComponent implements OnInit {
 
   deleteClickHandler(){
     if(confirm('Действительно удалить?')){
-       this._storage.deleteLessonCardById(this.cardIndex);
-
-       //TODO: сделать перезагрузку shedule компонента
+      this._storage.deleteLessonCardFromColumnByIds(this.columnIndex, this.cardIndex);
+      this.onCardDeleted.emit(null)
     }
   }
 }

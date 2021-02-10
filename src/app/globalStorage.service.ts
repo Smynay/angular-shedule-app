@@ -30,14 +30,29 @@ export class GlobalStorageService {
     }
   }
 
-  deleteLessonCardById(index){
-    this._lessonsStorage = this._lessonsStorage.filter((no, i) => i != index);
-    const filtredColumns = this._columnsStorage.map((column) => ({title: column.title, cardsIndexes: column.cardsIndexes.filter(cardIndex => cardIndex != index)}));
-    this._columnsStorage = filtredColumns;
+  deleteLessonCardFromColumnByIds(columnIndex, cardIndex){
+    const filterted = this._columnsStorage.map((column, index) => {
+      if(index == columnIndex){
+        return {
+          ...column,
+          cardsIndexes: column.cardsIndexes.filter((no, index) =>
+            index != cardIndex
+          )
+        }
+      }
+
+      return column
+    })
+
+    this._columnsStorage = filterted;
   }
 
   getColumnsStorage() {
     return this._columnsStorage;
+  }
+
+  getColumnStorageById(index) {
+    return this._columnsStorage[index];
   }
 
   // Mb should delete this?

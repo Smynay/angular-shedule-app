@@ -18,6 +18,8 @@
       <app-lesson-card
         [cardData]="cardsData[i]"
         [cardIndex]="cardIndex"
+        [columnIndex]="columnIndex"
+        (onCardDeleted)="refreshColumnData()"
       ></app-lesson-card>
     </div>
   </div>

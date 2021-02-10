@@ -13,11 +13,15 @@ export class SheduleComponent implements OnInit {
   constructor(private _storage: GlobalStorageService) {}
 
   ngOnInit(): void {
-    this.columnsData = this._storage.getColumnsStorage();
+    this.loadDataFromStorage()
   }
 
   addColumnHandler(){
     const columnTitle = prompt('Введите название колонки');
     this._storage.createNewColumn(columnTitle || 'без названия');
+  }
+
+  loadDataFromStorage(){
+    this.columnsData = this._storage.getColumnsStorage();
   }
 }

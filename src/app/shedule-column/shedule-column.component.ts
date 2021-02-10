@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { GlobalStorageService } from './../globalStorage.service';
@@ -10,9 +10,9 @@ import { IColumn } from './../types/types';
   styleUrls: ['./shedule-column.component.scss'],
 })
 export class SheduleColumnComponent implements OnInit {
-  @Input() columnData: IColumn;
   @Input() columnIndex: number;
 
+  columnData;
   cardsData;
 
   constructor(
@@ -21,6 +21,11 @@ export class SheduleColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadDataFromStorage()
+  }
+
+  loadDataFromStorage(){
+    this.columnData = this._storage.getColumnStorageById(this.columnIndex);
     this.cardsData = this.columnData.cardsIndexes.map((index) =>
       this._storage.getLessonCardByIndex(index)
     );
@@ -43,5 +48,9 @@ export class SheduleColumnComponent implements OnInit {
     if(confirm('Действительно удалить колонку?')){
       //TODO: удалить колонку
     }
+  }
+
+  refreshColumnData(){
+    this.loadDataFromStorage()
   }
 }
