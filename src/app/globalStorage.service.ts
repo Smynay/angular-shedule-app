@@ -6,9 +6,9 @@ import { ILesson, IColumn } from './types/types';
 })
 export class GlobalStorageService {
   _lessonsStorage: ILesson[] = [
-    { time: '16:20', members: ['Anna', 'Boris', 'Clement'] },
-    { time: '16:20', members: ['Demian', 'Erick', 'Fedor'] },
-    { time: '16:20', members: ['George', 'Harold', 'Shindler'] },
+    { time: '16:20', members: ['Anna', 'Boris', 'Clement'], color: 'blue' },
+    { time: '16:20', members: ['Demian', 'Erick', 'Fedor'], color: 'grey'  },
+    { time: '16:20', members: ['George', 'Harold', 'Shindler'], color: 'pink'  },
   ];
 
   _columnsStorage: IColumn[] = [
@@ -18,7 +18,7 @@ export class GlobalStorageService {
   ];
 
   createNewLessonCard(columnIndex) {
-    const currentCardIndex = this._lessonsStorage.push({ time: '', members: [''] }) - 1;
+    const currentCardIndex = this._lessonsStorage.push({ time: '', members: [''], color: '' }) - 1;
     this._columnsStorage[columnIndex].cardsIndexes.push(currentCardIndex);
 
     return currentCardIndex;

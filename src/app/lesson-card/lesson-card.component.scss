@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   min-width: 300px;
 
   &__table {
@@ -20,4 +21,39 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__title{
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    height: 1.5rem;
+    border-radius: 4px 4px 0px 0px ;
+  }
+
+  .blue{
+    background: blue;
+  }
+
+  .yellow{
+    background: yellow;
+  }
+
+  .green{
+    background: green;
+  }
+
+  .pink{
+    background-color: pink;
+  }
+
+  .turquoise{
+    background: turquoise;
+  }
+
+  .grey{
+    background: grey;
+  }
 }
+
+

@@ -13,6 +13,18 @@
             (change)="changeTimeHandler($event)"
           />
         </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Выберите цвет</mat-label>
+          <mat-select [(value)]="form.color">
+            <mat-option>None</mat-option>
+            <mat-option value="blue">Синий</mat-option>
+            <mat-option value="yellow">Желтый</mat-option>
+            <mat-option value="green">Зеленый</mat-option>
+            <mat-option value="pink">Розовый</mat-option>
+            <mat-option value="turquoise">Бирюзовый</mat-option>
+            <mat-option value="grey">Серый</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <p class="mat-subheading-2 mb-0 text-center">Участники</p>
