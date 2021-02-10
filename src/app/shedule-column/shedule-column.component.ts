@@ -32,13 +32,10 @@ export class SheduleColumnComponent implements OnInit {
   }
 
   addCardHandler() {
-    //TODO: перенести создание карточки в форму
     this._router.navigate([
-      '/lesson',
-      this._storage.createNewLessonCard(this.columnIndex),
+      '/create',
+      this.columnIndex
     ]);
-
-    this.loadDataFromStorage();
   }
 
   editColumnTitleHandler(){
@@ -59,6 +56,8 @@ export class SheduleColumnComponent implements OnInit {
   }
 
   refreshColumnData(){
+    console.log('fresh');
+
     this.loadDataFromStorage();
   }
 }

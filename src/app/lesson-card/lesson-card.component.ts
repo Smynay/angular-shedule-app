@@ -30,5 +30,10 @@ export class LessonCardComponent implements OnInit {
       this._storage.deleteLessonCardFromColumnByIds(this.columnIndex, this.cardIndex);
       this.onCardDeleted.emit(null)
     }
+
+    console.log('card');
+
+    console.log( this._storage.getColumnStorageById(this.columnIndex));
+
   }
 }

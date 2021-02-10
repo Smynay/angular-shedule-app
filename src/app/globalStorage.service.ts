@@ -17,6 +17,19 @@ export class GlobalStorageService {
     { title: 'Среда', cardsIndexes: [2, 1, 2] },
   ];
 
+  addLessonCardIndexToColumn(columnIndex, cardIndex){
+    this._columnsStorage = this._columnsStorage.map((column, index) => {
+      if(index == columnIndex){
+          return {
+          ...column,
+          cardsIndexes: [...column.cardsIndexes, cardIndex]
+        }
+      }
+
+      return column
+    })
+  }
+
   changeColumnTitleById(columnIndex, title){
     this._columnsStorage = this._columnsStorage.map((column, index) => {
       if(index == columnIndex){
@@ -52,7 +65,7 @@ export class GlobalStorageService {
       if(index == columnIndex){
         return {
           ...column,
-          cardsIndexes: column.cardsIndexes.filter((no, index) =>
+          cardsIndexes: column.cardsIndexes.filter((index) =>
             index != cardIndex
           )
         }
@@ -61,6 +74,7 @@ export class GlobalStorageService {
       return column
     })
 
+    console.log(this.getColumnStorageById(columnIndex));
     this._columnsStorage = filterted;
   }
 
@@ -79,6 +93,10 @@ export class GlobalStorageService {
 
   getLessonCardByIndex(index) {
     return this._lessonsStorage[index];
+  }
+
+  getLessonCardLength(){
+    return this._lessonsStorage.length
   }
 
   setStorage(value) {
