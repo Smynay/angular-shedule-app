@@ -42,11 +42,12 @@ export class SheduleColumnComponent implements OnInit {
   }
 
   editColumnTitleHandler(){
-    if(prompt('Введите заголовок колонки')){
-      //TODO: изменить заголовок колонки
-    }
+    const newTitle = prompt('Введите заголовок колонки');
 
-    this.loadDataFromStorage();
+    if(newTitle){
+      this._storage.changeColumnTitleById(this.columnIndex, newTitle);
+      this.loadDataFromStorage();
+    }
   }
 
   deleteColumnHandler(){

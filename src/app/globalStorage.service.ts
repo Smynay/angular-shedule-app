@@ -17,6 +17,19 @@ export class GlobalStorageService {
     { title: 'Среда', cardsIndexes: [2, 1, 2] },
   ];
 
+  changeColumnTitleById(columnIndex, title){
+    this._columnsStorage = this._columnsStorage.map((column, index) => {
+      if(index == columnIndex){
+        return {
+          ...column,
+          title
+        }
+      }
+
+      return column
+    })
+  }
+
   createNewLessonCard(columnIndex) {
     const currentCardIndex = this._lessonsStorage.push({ time: '', members: [''], color: '' }) - 1;
     this._columnsStorage[columnIndex].cardsIndexes.push(currentCardIndex);
