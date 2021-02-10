@@ -61,13 +61,11 @@ export class GlobalStorageService {
   }
 
   deleteLessonCardFromColumnByIds(columnIndex, cardIndex){
-
-    //TODO: find
     const filterted = this._columnsStorage.map((column, index) => {
       if(index == columnIndex){
         return {
           ...column,
-          cardsIndexes: column.cardsIndexes.filter((no, index) =>
+          cardsIndexes: column.cardsIndexes.filter((index) =>
             index != cardIndex
           )
         }
