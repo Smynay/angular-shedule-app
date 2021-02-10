@@ -19,6 +19,8 @@ export class SheduleComponent implements OnInit {
   addColumnHandler(){
     const columnTitle = prompt('Введите название колонки');
     this._storage.createNewColumn(columnTitle || 'без названия');
+
+    this.loadDataFromStorage()
   }
 
   loadDataFromStorage(){
