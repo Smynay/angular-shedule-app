@@ -11,9 +11,16 @@ import { ILesson } from '../types/types';
   styleUrls: ['./lesson-form.component.scss'],
 })
 export class LessonFormComponent implements OnInit {
-  form: ILesson;
   lessonId: number;
+  columnId: number;
   isAddActive: boolean = true;
+  currentRoute: string;
+
+  form: ILesson = {
+    time: '',
+    members: [''],
+    color: ''
+  };
 
   constructor(
     private _route: ActivatedRoute,
@@ -23,8 +30,15 @@ export class LessonFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._route.params.subscribe((params) => (this.lessonId = params.id));
-    this.form = this._storage.getLessonCardByIndex(this.lessonId);
+    this._route.url.subscribe((params) => this.currentRoute = params[0].path);
+
+    if(this.currentRoute != 'create'){
+      this._route.params.subscribe((params) => this.lessonId = params.id);
+      this.form = this._storage.getLessonCardByIndex(this.lessonId);
+    } else {
+      this.lessonId = this._storage.getLessonCardLength();
+      this._route.params.subscribe((params) => this.columnId = params.columnId);
+    }
   }
 
   backClickHandler() {
@@ -33,6 +47,12 @@ export class LessonFormComponent implements OnInit {
 
   saveClickHandler() {
     this._storage.setLessonCardByIndex(this.lessonId, this.form);
+
+    if(this.currentRoute == 'create'){
+      this._storage.addLessonCardIndexToColumn(this.columnId, this.lessonId);
+
+    }
+
     this._router.navigate(['/shedule']);
   }
 

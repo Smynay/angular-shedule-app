@@ -5,6 +5,7 @@ import { LessonFormComponent } from './lesson-form/lesson-form.component';
 
 const routes: Routes = [
   { path: 'shedule', component: SheduleComponent },
+  { path: 'create/:columnId', component: LessonFormComponent },
   { path: 'lesson/:id', component: LessonFormComponent },
   { path: '', redirectTo: '/shedule', pathMatch: 'full' },
 ];

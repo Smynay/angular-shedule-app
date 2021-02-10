@@ -17,6 +17,19 @@ export class GlobalStorageService {
     { title: 'Среда', cardsIndexes: [2, 1, 2] },
   ];
 
+  addLessonCardIndexToColumn(columnIndex, cardIndex){
+    this._columnsStorage = this._columnsStorage.map((column, index) => {
+      if(index == columnIndex){
+          return {
+          ...column,
+          cardsIndexes: [...column.cardsIndexes, cardIndex]
+        }
+      }
+
+      return column
+    })
+  }
+
   changeColumnTitleById(columnIndex, title){
     this._columnsStorage = this._columnsStorage.map((column, index) => {
       if(index == columnIndex){
@@ -48,6 +61,8 @@ export class GlobalStorageService {
   }
 
   deleteLessonCardFromColumnByIds(columnIndex, cardIndex){
+
+    //TODO: find
     const filterted = this._columnsStorage.map((column, index) => {
       if(index == columnIndex){
         return {
@@ -61,6 +76,7 @@ export class GlobalStorageService {
       return column
     })
 
+    console.log(this.getColumnStorageById(columnIndex));
     this._columnsStorage = filterted;
   }
 
@@ -79,6 +95,10 @@ export class GlobalStorageService {
 
   getLessonCardByIndex(index) {
     return this._lessonsStorage[index];
+  }
+
+  getLessonCardLength(){
+    return this._lessonsStorage.length
   }
 
   setStorage(value) {
