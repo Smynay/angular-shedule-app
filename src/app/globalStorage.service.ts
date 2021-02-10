@@ -30,6 +30,10 @@ export class GlobalStorageService {
     }
   }
 
+  deleteColumnById(columnIndex){
+    this._columnsStorage = this._columnsStorage.filter((no, index) => index != columnIndex)
+  }
+
   deleteLessonCardFromColumnByIds(columnIndex, cardIndex){
     const filterted = this._columnsStorage.map((column, index) => {
       if(index == columnIndex){

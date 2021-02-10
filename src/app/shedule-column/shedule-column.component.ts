@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { GlobalStorageService } from './../globalStorage.service';
-import { IColumn } from './../types/types';
 
 @Component({
   selector: 'app-shedule-column',
@@ -11,6 +10,7 @@ import { IColumn } from './../types/types';
 })
 export class SheduleColumnComponent implements OnInit {
   @Input() columnIndex: number;
+  @Output() onColumnDeleted = new EventEmitter();
 
   columnData;
   cardsData;
@@ -21,7 +21,7 @@ export class SheduleColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadDataFromStorage()
+    this.loadDataFromStorage();
   }
 
   loadDataFromStorage(){
@@ -37,22 +37,27 @@ export class SheduleColumnComponent implements OnInit {
       '/lesson',
       this._storage.createNewLessonCard(this.columnIndex),
     ]);
-    this.loadDataFromStorage()
+
+    this.loadDataFromStorage();
   }
 
   editColumnTitleHandler(){
     if(prompt('Введите заголовок колонки')){
       //TODO: изменить заголовок колонки
     }
+
+    this.loadDataFromStorage();
   }
 
   deleteColumnHandler(){
     if(confirm('Действительно удалить колонку?')){
-      //TODO: удалить колонку
+      this._storage.deleteColumnById(this.columnIndex);
     }
+
+    this.onColumnDeleted.emit(null);
   }
 
   refreshColumnData(){
-    this.loadDataFromStorage()
+    this.loadDataFromStorage();
   }
 }
