@@ -1,31 +1,17 @@
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './app-material/app-material.module';
+import { AppComponentsModule } from './app-components/app-components.module';
 
-import { LessonCardComponent } from './lesson-card/lesson-card.component';
-import { SheduleComponent } from './shedule/shedule.component';
-import { LessonFormComponent } from './lesson-form/lesson-form.component';
-import { MatButtonModule } from '@angular/material/button';
-import { SheduleColumnComponent } from './shedule-column/shedule-column.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LessonCardComponent,
-    SheduleComponent,
-    LessonFormComponent,
-    SheduleColumnComponent,
-  ],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    AppMaterialModule,
-    MatButtonModule,
+    AppComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
