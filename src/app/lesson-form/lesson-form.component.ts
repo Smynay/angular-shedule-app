@@ -17,9 +17,11 @@ export class LessonFormComponent implements OnInit {
   currentRoute: string;
 
   form: ILesson = {
+    id: 0,
     time: '',
     members: [''],
-    color: ''
+    color: '',
+    columnId: 0
   };
 
   constructor(
@@ -34,10 +36,12 @@ export class LessonFormComponent implements OnInit {
 
     if(this.currentRoute != 'create'){
       this._route.params.subscribe((params) => this.lessonId = params.id);
-      this.form = this._storage.getLessonCardByIndex(this.lessonId);
+      this.form = this._storage.getLessonCardById(this.lessonId);
     } else {
-      this.lessonId = this._storage.getLessonCardLength();
-      this._route.params.subscribe((params) => this.columnId = params.columnId);
+      this._route.params.subscribe((params) => {
+        this.columnId = params.columnId;
+      });
+      this.form.columnId = this.columnId;
     }
   }
 
@@ -46,11 +50,10 @@ export class LessonFormComponent implements OnInit {
   }
 
   saveClickHandler() {
-    this._storage.setLessonCardByIndex(this.lessonId, this.form);
-
-    if(this.currentRoute == 'create'){
-      this._storage.addLessonCardIndexToColumn(this.columnId, this.lessonId);
-
+    if(this.currentRoute != 'create'){
+      this._storage.setLessonCardById(this.form.id, this.form);
+    } else {
+      this._storage.createNewLessonCard(this.form);
     }
 
     this._router.navigate(['/shedule']);

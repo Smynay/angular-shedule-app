@@ -9,7 +9,7 @@ import { GlobalStorageService } from '../services/globalStorage.service';
   styleUrls: ['./shedule-column.component.scss'],
 })
 export class SheduleColumnComponent implements OnInit {
-  @Input() columnIndex: number;
+  @Input() columnId: number;
   @Output() onColumnDeleted = new EventEmitter();
 
   columnData;
@@ -25,16 +25,14 @@ export class SheduleColumnComponent implements OnInit {
   }
 
   loadDataFromStorage(){
-    this.columnData = this._storage.getColumnStorageById(this.columnIndex);
-    this.cardsData = this.columnData.cardsIndexes.map((index) =>
-      this._storage.getLessonCardByIndex(index)
-    );
+    this.columnData = this._storage.getColumnStorageById(this.columnId);
+    this.cardsData = this._storage.getLessonsStorage().filter((lesson) => lesson.columnId == this.columnId);
   }
 
   addCardHandler() {
     this._router.navigate([
       '/create',
-      this.columnIndex
+      this.columnId
     ]);
   }
 
@@ -42,22 +40,20 @@ export class SheduleColumnComponent implements OnInit {
     const newTitle = prompt('Введите заголовок колонки');
 
     if(newTitle){
-      this._storage.changeColumnTitleById(this.columnIndex, newTitle);
+      this._storage.changeColumnTitleById(this.columnId, newTitle);
       this.loadDataFromStorage();
     }
   }
 
   deleteColumnHandler(){
     if(confirm('Действительно удалить колонку?')){
-      this._storage.deleteColumnById(this.columnIndex);
+      this._storage.deleteColumnById(this.columnId);
     }
 
     this.onColumnDeleted.emit(null);
   }
 
   refreshColumnData(){
-    console.log('fresh');
-
     this.loadDataFromStorage();
   }
 }

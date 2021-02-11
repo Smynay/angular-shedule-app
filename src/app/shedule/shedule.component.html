@@ -5,7 +5,7 @@
       <app-shedule-column
         class="board__column"
         *ngFor="let columnData of columnsData; let i = index"
-        [columnIndex]="i"
+        [columnId]="columnData.id"
         (onColumnDeleted)="loadDataFromStorage()"
       ></app-shedule-column>
       <div class="board__column d-flex align-items-center justify-content-around">

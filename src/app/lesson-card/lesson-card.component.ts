@@ -11,29 +11,23 @@ import { GlobalStorageService } from '../services/globalStorage.service';
 })
 export class LessonCardComponent implements OnInit {
   @Input() cardData: ILesson;
-  @Input() cardIndex: number;
-  @Input() columnIndex: number;
 
   @Output() onCardDeleted = new EventEmitter();
 
   constructor(private _router: Router, private _storage: GlobalStorageService) {}
 
   ngOnInit(): void {
+    console.log(this.cardData.id);
   }
 
   editClickHandler() {
-    this._router.navigate(['/lesson', this.cardIndex]);
+    this._router.navigate(['/lesson', this.cardData.id]);
   }
 
   deleteClickHandler(){
     if(confirm('Действительно удалить?')){
-      this._storage.deleteLessonCardFromColumnByIds(this.columnIndex, this.cardIndex);
+      this._storage.deleteLessonCard(this.cardData.id);
       this.onCardDeleted.emit(null)
     }
-
-    console.log('card');
-
-    console.log( this._storage.getColumnStorageById(this.columnIndex));
-
   }
 }

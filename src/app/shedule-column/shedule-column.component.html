@@ -13,12 +13,10 @@
   <div class="column__list flex-grow-1">
     <div
       class="column__item"
-      *ngFor="let cardIndex of columnData.cardsIndexes; let i = index"
+      *ngFor="let card of cardsData; let i = index"
     >
       <app-lesson-card
         [cardData]="cardsData[i]"
-        [cardIndex]="cardIndex"
-        [columnIndex]="columnIndex"
         (onCardDeleted)="refreshColumnData()"
       ></app-lesson-card>
     </div>

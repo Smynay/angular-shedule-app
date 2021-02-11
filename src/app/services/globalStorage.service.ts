@@ -1,38 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ILesson, IColumn } from '../types/types';
 
+import { getRandomId } from '../utils/randomId';
+
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalStorageService {
   _lessonsStorage: ILesson[] = [
-    { time: '16:20', members: ['Anna', 'Boris', 'Clement'], color: 'blue' },
-    { time: '16:20', members: ['Demian', 'Erick', 'Fedor'], color: 'grey'  },
-    { time: '16:20', members: ['George', 'Harold', 'Shindler'], color: 'pink'  },
+    { id: 0, time: '16:20', members: ['Anna', 'Boris', 'Clement'], color: 'blue', columnId: 0 },
+    { id: 1, time: '16:20', members: ['Demian', 'Erick', 'Fedor'], color: 'grey', columnId: 1  },
+    { id: 2, time: '16:20', members: ['George', 'Harold', 'Shindler'], color: 'pink', columnId: 2  },
   ];
 
   _columnsStorage: IColumn[] = [
-    { title: 'Понедельник', cardsIndexes: [0, 1, 2] },
-    { title: 'Вторник', cardsIndexes: [2, 1, 1] },
-    { title: 'Среда', cardsIndexes: [2, 1, 2] },
+    { id: 0, title: 'Понедельник' },
+    { id: 1, title: 'Вторник' },
+    { id: 2, title: 'Среда' },
   ];
 
-  addLessonCardIndexToColumn(columnIndex, cardIndex){
+  changeColumnTitleById(columnId, title){
     this._columnsStorage = this._columnsStorage.map((column, index) => {
-      if(index == columnIndex){
-          return {
-          ...column,
-          cardsIndexes: [...column.cardsIndexes, cardIndex]
-        }
-      }
-
-      return column
-    })
-  }
-
-  changeColumnTitleById(columnIndex, title){
-    this._columnsStorage = this._columnsStorage.map((column, index) => {
-      if(index == columnIndex){
+      if(index == columnId){
         return {
           ...column,
           title
@@ -43,67 +32,47 @@ export class GlobalStorageService {
     })
   }
 
-  createNewLessonCard(columnIndex) {
-    const currentCardIndex = this._lessonsStorage.push({ time: '', members: [''], color: '' }) - 1;
-    this._columnsStorage[columnIndex].cardsIndexes.push(currentCardIndex);
-
-    return currentCardIndex;
+  createNewLessonCard(cardData) {
+    this._lessonsStorage.push({...cardData, id: getRandomId()});
   }
 
   createNewColumn(title){
     if(this._columnsStorage.length < 7){
-      this._columnsStorage.push({title, cardsIndexes: []})
+      this._columnsStorage.push({id: getRandomId(), title})
     }
   }
 
-  deleteColumnById(columnIndex){
-    this._columnsStorage = this._columnsStorage.filter((no, index) => index != columnIndex)
+  deleteColumnById(columnId){
+    this._columnsStorage = this._columnsStorage.filter((column) => column.id != columnId)
   }
 
-  deleteLessonCardFromColumnByIds(columnIndex, cardIndex){
-    const filterted = this._columnsStorage.map((column, index) => {
-      if(index == columnIndex){
-        return {
-          ...column,
-          cardsIndexes: column.cardsIndexes.filter((index) =>
-            index != cardIndex
-          )
-        }
-      }
-
-      return column
-    })
-
-    console.log(this.getColumnStorageById(columnIndex));
-    this._columnsStorage = filterted;
+  deleteLessonCard(cardId){
+    const filterted = this._lessonsStorage.filter((lesson) => lesson.id != cardId);
+    this._lessonsStorage = filterted;
   }
 
   getColumnsStorage() {
     return this._columnsStorage;
   }
 
-  getColumnStorageById(index) {
-    return this._columnsStorage[index];
+  getColumnStorageById(columnId) {
+    return this._columnsStorage.find((column) => column.id == columnId);
   }
 
-  // Mb should delete this?
   getLessonsStorage() {
     return this._lessonsStorage;
   }
 
-  getLessonCardByIndex(index) {
-    return this._lessonsStorage[index];
-  }
-
-  getLessonCardLength(){
-    return this._lessonsStorage.length
+  getLessonCardById(cardId) {
+    return this._lessonsStorage.find((lesson) => lesson.id == cardId);
   }
 
   setStorage(value) {
     this._lessonsStorage = value;
   }
 
-  setLessonCardByIndex(index, value) {
-    this._lessonsStorage[index] = value;
+  setLessonCardById(cardId, value) {
+    const mapped = this._lessonsStorage.map((lesson) => lesson.id == cardId ? value : lesson);
+    this._lessonsStorage = mapped;
   }
 }
