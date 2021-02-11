@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { GlobalStorageService } from '../globalStorage.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 import { ILesson } from '../types/types';
 
 @Component({

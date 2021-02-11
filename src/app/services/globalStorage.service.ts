@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ILesson, IColumn } from './types/types';
+import { ILesson, IColumn } from '../types/types';
 
 @Injectable({
   providedIn: 'root',
