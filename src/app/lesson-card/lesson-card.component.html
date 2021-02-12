@@ -3,7 +3,7 @@
   <mat-card-content>
     <div class="card__table">
       <div class="card__time">{{ cardData.time }}</div>
-      <ol>
+      <ol class="card__members">
         <li *ngFor="let item of cardData.members">{{ item }}</li>
       </ol>
     </div>

@@ -11,7 +11,17 @@ export class GlobalStorageService {
     {
       id: 0,
       time: '16:20',
-      members: ['Anna', 'Boris', 'Clement'],
+      members: [
+        'Абрамович',
+        'Рохманов',
+        'Куфман',
+        'Чирингашвили',
+        'Кочубор',
+        'Сташешен',
+        'Максим',
+        'Брахманчук',
+        'Игнатьева'
+      ],
       color: 'blue',
       columnId: 0,
     },

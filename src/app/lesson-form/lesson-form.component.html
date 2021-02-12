@@ -1,63 +1,65 @@
-<mat-card class="card d-flex flex-column">
-  <mat-card-title class="mat-headline text-center"
-    >Карточка занятия</mat-card-title
-  >
-  <mat-card-content>
-    <form class="example-form">
-      <div class="card__data d-flex justify-content-around">
-        <mat-form-field class="example-full-width">
-          <mat-label>Время занятия</mat-label>
-          <input
-            matInput
-            type="time"
-            [value]="form.time"
-            (change)="changeTimeHandler($event)"
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Выберите цвет</mat-label>
-          <mat-select [(value)]="form.color">
-            <mat-option>None</mat-option>
-            <mat-option value="blue">Синий</mat-option>
-            <mat-option value="yellow">Желтый</mat-option>
-            <mat-option value="green">Зеленый</mat-option>
-            <mat-option value="pink">Розовый</mat-option>
-            <mat-option value="turquoise">Бирюзовый</mat-option>
-            <mat-option value="grey">Серый</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+<div class="card__wrapper d-flex align-items-center justify-content-around">
+  <mat-card class="card d-flex flex-column">
+    <mat-card-title class="mat-headline text-center"
+      >Карточка занятия</mat-card-title
+    >
+    <mat-card-content>
+      <form class="example-form">
+        <div class="card__data d-flex justify-content-around flex-wrap">
+          <mat-form-field class="example-full-width">
+            <mat-label>Время занятия</mat-label>
+            <input
+              matInput
+              type="time"
+              [value]="form.time"
+              (change)="changeTimeHandler($event)"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Выберите цвет</mat-label>
+            <mat-select [(value)]="form.color">
+              <mat-option>None</mat-option>
+              <mat-option value="blue">Синий</mat-option>
+              <mat-option value="yellow">Желтый</mat-option>
+              <mat-option value="green">Зеленый</mat-option>
+              <mat-option value="pink">Розовый</mat-option>
+              <mat-option value="turquoise">Бирюзовый</mat-option>
+              <mat-option value="grey">Серый</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-      <p class="mat-subheading-2 mb-0 text-center">Участники</p>
-      <div class="card__members d-flex flex-wrap justify-content-around">
-        <mat-form-field
-          class="example-full-width"
-          *ngFor="let surname of form.members; let i = index"
-        >
-          <mat-label>Участник {{ i + 1 }}</mat-label>
-          <input
-            matInput
-            [value]="surname"
-            (change)="changeValueHandler($event, i)"
-          />
-        </mat-form-field>
+        <p class="mat-subheading-2 mb-0 text-center">Участники</p>
+        <div class="card__members d-flex flex-wrap justify-content-around">
+          <mat-form-field
+            class="example-full-width"
+            *ngFor="let surname of form.members; let i = index"
+          >
+            <mat-label>Участник {{ i + 1 }}</mat-label>
+            <input
+              matInput
+              [value]="surname"
+              (change)="changeValueHandler($event, i)"
+            />
+          </mat-form-field>
 
-        <button
-          mat-button
-          color="accent"
-          (click)="addMemberHandler()"
-          *ngIf="isAddActive"
-        >
-          <mat-icon>add_circle</mat-icon>
-          <span class="ml-1">Добавить участника</span>
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-  <mat-card-actions class="d-flex justify-content-between mb-1">
-    <button mat-raised-button (click)="backClickHandler()">Назад</button>
-    <button mat-raised-button color="primary" (click)="saveClickHandler()">
-      Сохранить
-    </button>
-  </mat-card-actions>
-</mat-card>
+          <button
+            mat-button
+            color="accent"
+            (click)="addMemberHandler()"
+            *ngIf="isAddActive"
+          >
+            <mat-icon>add_circle</mat-icon>
+            <span class="ml-1">Добавить участника</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="d-flex justify-content-between mb-1">
+      <button mat-raised-button (click)="backClickHandler()">Назад</button>
+      <button mat-raised-button color="primary" (click)="saveClickHandler()">
+        Сохранить
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

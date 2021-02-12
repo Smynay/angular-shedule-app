@@ -1,6 +1,10 @@
 .card {
   max-width: 500px;
 
+  &__wrapper {
+    height: 100%;
+  }
+
   &__members {
     gap: 2rem;
   }
