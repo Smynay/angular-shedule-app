@@ -32,15 +32,14 @@ export class LessonFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._route.url.subscribe((params) => (this.currentRoute = params[0].path));
+    this.currentRoute = this._route.snapshot.url[0].path;
 
     if (this.currentRoute != 'create') {
-      this._route.params.subscribe((params) => (this.lessonId = params.id));
+      this.lessonId = this._route.snapshot.params.id;
       this.form = this._storage.getLessonCardById(this.lessonId);
+
     } else {
-      this._route.params.subscribe((params) => {
-        this.columnId = params.columnId;
-      });
+      this.columnId = this._route.snapshot.params.columnId;
       this.form.columnId = this.columnId;
     }
   }
@@ -52,6 +51,7 @@ export class LessonFormComponent implements OnInit {
   saveClickHandler(): void {
     if (this.currentRoute != 'create') {
       this._storage.changeLessonCardById(this.form.id, this.form);
+
     } else {
       this._storage.createNewLessonCard(this.form);
     }
