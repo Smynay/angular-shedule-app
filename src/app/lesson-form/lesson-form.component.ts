@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { GlobalStorageService } from '../services/globalStorage.service';
-import { ILesson } from '../types/types';
+import { ILesson } from '../models/models';
 
 @Component({
   selector: 'app-lesson-form',
@@ -21,7 +21,7 @@ export class LessonFormComponent implements OnInit {
     time: '',
     members: [''],
     color: '',
-    columnId: 0
+    columnId: 0,
   };
 
   constructor(
@@ -32,10 +32,10 @@ export class LessonFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._route.url.subscribe((params) => this.currentRoute = params[0].path);
+    this._route.url.subscribe((params) => (this.currentRoute = params[0].path));
 
-    if(this.currentRoute != 'create'){
-      this._route.params.subscribe((params) => this.lessonId = params.id);
+    if (this.currentRoute != 'create') {
+      this._route.params.subscribe((params) => (this.lessonId = params.id));
       this.form = this._storage.getLessonCardById(this.lessonId);
     } else {
       this._route.params.subscribe((params) => {
@@ -50,7 +50,7 @@ export class LessonFormComponent implements OnInit {
   }
 
   saveClickHandler() {
-    if(this.currentRoute != 'create'){
+    if (this.currentRoute != 'create') {
       this._storage.setLessonCardById(this.form.id, this.form);
     } else {
       this._storage.createNewLessonCard(this.form);

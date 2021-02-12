@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ILesson, IColumn } from '../types/types';
 
+import { ILesson, IColumn } from '../models/models';
 import { getRandomId } from '../utils/randomId';
 
 @Injectable({
@@ -8,9 +8,27 @@ import { getRandomId } from '../utils/randomId';
 })
 export class GlobalStorageService {
   _lessonsStorage: ILesson[] = [
-    { id: 0, time: '16:20', members: ['Anna', 'Boris', 'Clement'], color: 'blue', columnId: 0 },
-    { id: 1, time: '16:20', members: ['Demian', 'Erick', 'Fedor'], color: 'grey', columnId: 1  },
-    { id: 2, time: '16:20', members: ['George', 'Harold', 'Shindler'], color: 'pink', columnId: 2  },
+    {
+      id: 0,
+      time: '16:20',
+      members: ['Anna', 'Boris', 'Clement'],
+      color: 'blue',
+      columnId: 0,
+    },
+    {
+      id: 1,
+      time: '16:20',
+      members: ['Demian', 'Erick', 'Fedor'],
+      color: 'grey',
+      columnId: 1,
+    },
+    {
+      id: 2,
+      time: '16:20',
+      members: ['George', 'Harold', 'Shindler'],
+      color: 'pink',
+      columnId: 2,
+    },
   ];
 
   _columnsStorage: IColumn[] = [
@@ -19,35 +37,39 @@ export class GlobalStorageService {
     { id: 2, title: 'Среда' },
   ];
 
-  changeColumnTitleById(columnId, title){
+  changeColumnTitleById(columnId, title) {
     this._columnsStorage = this._columnsStorage.map((column, index) => {
-      if(index == columnId){
+      if (index == columnId) {
         return {
           ...column,
-          title
-        }
+          title,
+        };
       }
 
-      return column
-    })
+      return column;
+    });
   }
 
   createNewLessonCard(cardData) {
-    this._lessonsStorage.push({...cardData, id: getRandomId()});
+    this._lessonsStorage.push({ ...cardData, id: getRandomId() });
   }
 
-  createNewColumn(title){
-    if(this._columnsStorage.length < 7){
-      this._columnsStorage.push({id: getRandomId(), title})
+  createNewColumn(title) {
+    if (this._columnsStorage.length < 7) {
+      this._columnsStorage.push({ id: getRandomId(), title });
     }
   }
 
-  deleteColumnById(columnId){
-    this._columnsStorage = this._columnsStorage.filter((column) => column.id != columnId)
+  deleteColumnById(columnId) {
+    this._columnsStorage = this._columnsStorage.filter(
+      (column) => column.id != columnId
+    );
   }
 
-  deleteLessonCard(cardId){
-    const filterted = this._lessonsStorage.filter((lesson) => lesson.id != cardId);
+  deleteLessonCard(cardId) {
+    const filterted = this._lessonsStorage.filter(
+      (lesson) => lesson.id != cardId
+    );
     this._lessonsStorage = filterted;
   }
 
@@ -72,7 +94,9 @@ export class GlobalStorageService {
   }
 
   setLessonCardById(cardId, value) {
-    const mapped = this._lessonsStorage.map((lesson) => lesson.id == cardId ? value : lesson);
+    const mapped = this._lessonsStorage.map((lesson) =>
+      lesson.id == cardId ? value : lesson
+    );
     this._lessonsStorage = mapped;
   }
 }

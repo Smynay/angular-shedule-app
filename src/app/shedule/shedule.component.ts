@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GlobalStorageService } from '../services/globalStorage.service';
+import { IColumn } from '../models/models';
 
 @Component({
   selector: 'app-shedule',
@@ -8,22 +9,22 @@ import { GlobalStorageService } from '../services/globalStorage.service';
   styleUrls: ['./shedule.component.scss'],
 })
 export class SheduleComponent implements OnInit {
-  columnsData;
+  columnsData: IColumn[];
 
   constructor(private _storage: GlobalStorageService) {}
 
   ngOnInit(): void {
-    this.loadDataFromStorage()
+    this.loadDataFromStorage();
   }
 
-  addColumnHandler(){
+  addColumnHandler() {
     const columnTitle = prompt('Введите название колонки');
     this._storage.createNewColumn(columnTitle || 'без названия');
 
-    this.loadDataFromStorage()
+    this.loadDataFromStorage();
   }
 
-  loadDataFromStorage(){
+  loadDataFromStorage() {
     this.columnsData = this._storage.getColumnsStorage();
   }
 }
