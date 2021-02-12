@@ -19,11 +19,11 @@ export class LessonCardComponent {
     private _storage: GlobalStorageService
   ) {}
 
-  editClickHandler() {
+  editClickHandler(): void {
     this._router.navigate(['/lesson', this.cardData.id]);
   }
 
-  deleteClickHandler() {
+  deleteClickHandler(): void {
     if (confirm('Действительно удалить?')) {
       this._storage.deleteLessonCard(this.cardData.id);
       this.onCardDeleted.emit(null);

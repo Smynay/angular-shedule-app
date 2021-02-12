@@ -26,18 +26,18 @@ export class SheduleColumnComponent implements OnInit {
     this.loadDataFromStorage();
   }
 
-  loadDataFromStorage() {
+  loadDataFromStorage(): void {
     this.columnData = this._storage.getColumnStorageById(this.columnId);
     this.cardsData = this._storage
       .getLessonsStorage()
       .filter((lesson) => lesson.columnId == this.columnId);
   }
 
-  addCardHandler() {
+  addCardHandler(): void {
     this._router.navigate(['/create', this.columnId]);
   }
 
-  editColumnTitleHandler() {
+  editColumnTitleHandler(): void {
     const newTitle = prompt('Введите заголовок колонки');
 
     if (newTitle) {
@@ -46,7 +46,7 @@ export class SheduleColumnComponent implements OnInit {
     }
   }
 
-  deleteColumnHandler() {
+  deleteColumnHandler(): void {
     if (confirm('Действительно удалить колонку?')) {
       this._storage.deleteColumnById(this.columnId);
     }
@@ -54,7 +54,7 @@ export class SheduleColumnComponent implements OnInit {
     this.onColumnDeleted.emit(null);
   }
 
-  refreshColumnData() {
+  refreshColumnData(): void {
     this.loadDataFromStorage();
   }
 }

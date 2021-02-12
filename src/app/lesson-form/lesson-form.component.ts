@@ -45,11 +45,11 @@ export class LessonFormComponent implements OnInit {
     }
   }
 
-  backClickHandler() {
+  backClickHandler(): void {
     this._location.back();
   }
 
-  saveClickHandler() {
+  saveClickHandler(): void {
     if (this.currentRoute != 'create') {
       this._storage.changeLessonCardById(this.form.id, this.form);
     } else {
@@ -59,15 +59,15 @@ export class LessonFormComponent implements OnInit {
     this._router.navigate(['/shedule']);
   }
 
-  changeTimeHandler({ target }) {
+  changeTimeHandler({ target }: any) {
     this.form.time = target.value;
   }
 
-  changeValueHandler({ target }, id) {
+  changeValueHandler({ target }: any, id: number) {
     this.form.members[id] = target.value;
   }
 
-  addMemberHandler() {
+  addMemberHandler(): void {
     event.preventDefault();
 
     if (this.checkMembers()) {
@@ -79,7 +79,7 @@ export class LessonFormComponent implements OnInit {
     }
   }
 
-  checkMembers() {
+  checkMembers(): boolean {
     let members = this.form.members.concat();
 
     if (this.checkMembersCount(members, 11)) {
@@ -93,7 +93,7 @@ export class LessonFormComponent implements OnInit {
     return true;
   }
 
-  checkMembersCount(membersArr, validCount) {
+  checkMembersCount(membersArr: string[], validCount: number): boolean {
     if (membersArr.length > validCount - 1) {
       return true;
     }
