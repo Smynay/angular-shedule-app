@@ -51,7 +51,7 @@ export class LessonFormComponent implements OnInit {
 
   saveClickHandler() {
     if (this.currentRoute != 'create') {
-      this._storage.setLessonCardById(this.form.id, this.form);
+      this._storage.changeLessonCardById(this.form.id, this.form);
     } else {
       this._storage.createNewLessonCard(this.form);
     }

@@ -37,66 +37,52 @@ export class GlobalStorageService {
     { id: 2, title: 'Среда' },
   ];
 
-  changeColumnTitleById(columnId, title) {
-    this._columnsStorage = this._columnsStorage.map((column, index) => {
-      if (index == columnId) {
-        return {
-          ...column,
-          title,
-        };
-      }
-
-      return column;
-    });
+  changeColumnTitleById(columnId: number, title: string): void {
+    let columnIndex = this._columnsStorage.findIndex((column) => column.id == columnId);
+    this._columnsStorage[columnIndex] = {...this._columnsStorage[columnIndex], title};
   }
 
-  createNewLessonCard(cardData) {
+  changeLessonCardById(cardId: number, cardData: ILesson): void {
+    this._lessonsStorage[
+      this._lessonsStorage.findIndex((lesson) => lesson.id == cardId)
+    ] = cardData;
+  }
+
+  createNewLessonCard(cardData: ILesson): void {
     this._lessonsStorage.push({ ...cardData, id: getRandomId() });
   }
 
-  createNewColumn(title) {
+  createNewColumn(title: string): void {
     if (this._columnsStorage.length < 7) {
       this._columnsStorage.push({ id: getRandomId(), title });
     }
   }
 
-  deleteColumnById(columnId) {
-    this._columnsStorage = this._columnsStorage.filter(
-      (column) => column.id != columnId
+  deleteColumnById(columnId: number): void {
+    this._columnsStorage.splice(
+      this._columnsStorage.findIndex((column) => column.id == columnId), 1
     );
   }
 
-  deleteLessonCard(cardId) {
-    const filterted = this._lessonsStorage.filter(
-      (lesson) => lesson.id != cardId
+  deleteLessonCard(cardId: number): void {
+    this._lessonsStorage.splice(
+      this._lessonsStorage.findIndex((lesson) => lesson.id == cardId), 1
     );
-    this._lessonsStorage = filterted;
   }
 
-  getColumnsStorage() {
+  getColumnsStorage(): IColumn[] {
     return this._columnsStorage;
   }
 
-  getColumnStorageById(columnId) {
+  getColumnStorageById(columnId: number): IColumn {
     return this._columnsStorage.find((column) => column.id == columnId);
   }
 
-  getLessonsStorage() {
+  getLessonsStorage(): ILesson[] {
     return this._lessonsStorage;
   }
 
-  getLessonCardById(cardId) {
+  getLessonCardById(cardId: number): ILesson {
     return this._lessonsStorage.find((lesson) => lesson.id == cardId);
-  }
-
-  setStorage(value) {
-    this._lessonsStorage = value;
-  }
-
-  setLessonCardById(cardId, value) {
-    const mapped = this._lessonsStorage.map((lesson) =>
-      lesson.id == cardId ? value : lesson
-    );
-    this._lessonsStorage = mapped;
   }
 }
