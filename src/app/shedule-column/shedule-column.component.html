@@ -1,15 +1,5 @@
 <div class="column">
-  <div class="column__title d-flex justify-content-between align-items-center mb-1">
-    <h2 class="mat-subheading-2 text-center mb-0">{{ columnData.title }}</h2>
-    <div>
-      <button mat-icon-button color="accent" (click)="editColumnTitleHandler()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="deleteColumnHandler()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </div>
+  <h2 class="mat-subheading-2 text-center mb-2">{{ columnData.title }}</h2>
   <div class="column__list flex-grow-1">
     <div
       class="column__item"
@@ -17,7 +7,7 @@
     >
       <app-lesson-card
         [cardData]="cardsData[i]"
-        (onCardDeleted)="refreshColumnData()"
+        (onCardDeleted)="deleteCardHandler($event)"
       ></app-lesson-card>
     </div>
   </div>

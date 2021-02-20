@@ -6,14 +6,7 @@
         class="board__column"
         *ngFor="let columnData of columnsData; let i = index"
         [columnId]="columnData.id"
-        (onColumnDeleted)="loadDataFromStorage()"
       ></app-shedule-column>
-      <div class="board__column d-flex align-items-center justify-content-around">
-        <button mat-button color="accent" (click)="addColumnHandler()">
-          <mat-icon>add_circle</mat-icon>
-          <span class="ml-1">Добавить колонку</span>
-        </button>
-      </div>
     </div>
   </div>
 </div>

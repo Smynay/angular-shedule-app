@@ -12,7 +12,6 @@ import { IColumn } from '../models/models';
 })
 export class SheduleColumnComponent implements OnInit {
   @Input() columnId: number;
-  @Output() onColumnDeleted = new EventEmitter();
 
   columnData: IColumn;
   cardsData: ILesson[];
@@ -46,15 +45,12 @@ export class SheduleColumnComponent implements OnInit {
     }
   }
 
-  deleteColumnHandler(): void {
-    if (confirm('Действительно удалить колонку?')) {
-      this._storage.deleteColumnById(this.columnId);
+  deleteCardHandler({cardId}): void {
+    console.log(cardId);
+
+    if (confirm('Действительно удалить?')) {
+      this._storage.deleteLessonCard(cardId);
+      this.loadDataFromStorage();
     }
-
-    this.onColumnDeleted.emit(null);
-  }
-
-  refreshColumnData(): void {
-    this.loadDataFromStorage();
   }
 }

@@ -24,9 +24,6 @@ export class LessonCardComponent {
   }
 
   deleteClickHandler(): void {
-    if (confirm('Действительно удалить?')) {
-      this._storage.deleteLessonCard(this.cardData.id);
-      this.onCardDeleted.emit(null);
-    }
+    this.onCardDeleted.emit({ cardId: this.cardData.id});
   }
 }
