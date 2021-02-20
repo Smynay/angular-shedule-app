@@ -30,7 +30,35 @@ export class SheduleColumnComponent implements OnInit {
     this.columnData = this._storage.getColumnStorageById(this.columnId);
     this.cardsData = this._storage
       .getLessonsStorage()
-      .filter((lesson) => lesson.columnId == this.columnId);
+      .filter((lesson) => lesson.columnId == this.columnId)
+      .sort(this.compareTimeStrings);
+  }
+
+  compareTimeStrings(a: any, b: any): number {
+    function getHoursMinutes(timestring) {
+      return [+timestring.slice(0, 2), +timestring.slice(-2)];
+    }
+
+    const [hoursA, minutesA] = getHoursMinutes(a.time);
+    const [hoursB, minutesB] = getHoursMinutes(b.time);
+
+    if(hoursA > hoursB){
+      return 1;
+    }
+
+    if(hoursA < hoursB){
+      return -1
+    }
+
+    if(minutesA > minutesB){
+      return 1
+    }
+
+    if(minutesA < minutesB){
+      return -1
+    }
+
+    return 0
   }
 
   addCardHandler(): void {
@@ -72,6 +100,8 @@ export class SheduleColumnComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
+      this.cardsData.sort(this.compareTimeStrings);
     }
   }
 }
