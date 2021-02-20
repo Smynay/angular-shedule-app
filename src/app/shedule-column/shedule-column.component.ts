@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { GlobalStorageService } from '../services/globalStorage.service';
@@ -46,8 +46,6 @@ export class SheduleColumnComponent implements OnInit {
   }
 
   deleteCardHandler({cardId}): void {
-    console.log(cardId);
-
     if (confirm('Действительно удалить?')) {
       this._storage.deleteLessonCard(cardId);
       this.loadDataFromStorage();

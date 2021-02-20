@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { GlobalStorageService } from '../services/globalStorage.service';
 import { ILesson } from '../models/models';
 
 @Component({
@@ -15,8 +14,7 @@ export class LessonCardComponent {
   @Output() onCardDeleted = new EventEmitter();
 
   constructor(
-    private _router: Router,
-    private _storage: GlobalStorageService
+    private _router: Router
   ) {}
 
   editClickHandler(): void {
