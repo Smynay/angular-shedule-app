@@ -9,6 +9,7 @@
   >
     <app-lesson-card
       cdkDrag
+      class="list__item"
       *ngFor="let card of cardsData; let i = index"
       [cardData]="cardsData[i]"
       (onCardEvent)="cardEventsHandler($event)"
