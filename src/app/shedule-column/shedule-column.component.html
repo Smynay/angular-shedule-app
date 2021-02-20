@@ -1,15 +1,17 @@
 <div class="column">
   <h2 class="mat-subheading-2 text-center mb-2">{{ columnData.title }}</h2>
-  <div class="column__list flex-grow-1">
-    <div
-      class="column__item"
+  <div
+    cdkDropList
+    class="column__list flex-grow-1"
+    [cdkDropListData]="cardsData"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <app-lesson-card
+      cdkDrag
       *ngFor="let card of cardsData; let i = index"
-    >
-      <app-lesson-card
-        [cardData]="cardsData[i]"
-        (onCardEvent)="cardEventsHandler($event)"
-      ></app-lesson-card>
-    </div>
+      [cardData]="cardsData[i]"
+      (onCardEvent)="cardEventsHandler($event)"
+    ></app-lesson-card>
   </div>
 
   <button

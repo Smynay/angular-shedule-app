@@ -51,11 +51,6 @@ export class GlobalStorageService {
     { id: 6, title: 'Воскресенье' }
   ];
 
-  changeColumnTitleById(columnId: number, title: string): void {
-    let columnIndex = this._columnsStorage.findIndex((column) => column.id == columnId);
-    this._columnsStorage[columnIndex] = {...this._columnsStorage[columnIndex], title};
-  }
-
   changeLessonCardById(cardId: number, cardData: ILesson): void {
     this._lessonsStorage[
       this._lessonsStorage.findIndex((lesson) => lesson.id == cardId)
@@ -64,18 +59,6 @@ export class GlobalStorageService {
 
   createNewLessonCard(cardData: ILesson): void {
     this._lessonsStorage.push({ ...cardData, id: getRandomId() });
-  }
-
-  createNewColumn(title: string): void {
-    if (this._columnsStorage.length < 7) {
-      this._columnsStorage.push({ id: getRandomId(), title });
-    }
-  }
-
-  deleteColumnById(columnId: number): void {
-    this._columnsStorage.splice(
-      this._columnsStorage.findIndex((column) => column.id == columnId), 1
-    );
   }
 
   deleteLessonCard(cardId: number): void {

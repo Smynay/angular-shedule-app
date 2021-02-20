@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { ILesson } from '../models/models';
@@ -36,15 +37,6 @@ export class SheduleColumnComponent implements OnInit {
     this._router.navigate(['/create', this.columnId]);
   }
 
-  editColumnTitleHandler(): void {
-    const newTitle = prompt('Введите заголовок колонки');
-
-    if (newTitle) {
-      this._storage.changeColumnTitleById(this.columnId, newTitle);
-      this.loadDataFromStorage();
-    }
-  }
-
   cardEventsHandler({action, cardId}): void {
     switch (action){
       case 'edit':
@@ -57,6 +49,24 @@ export class SheduleColumnComponent implements OnInit {
           this.loadDataFromStorage();
         }
         break;
+    }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 }
