@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ILesson } from '../models/models';
 
@@ -10,18 +9,13 @@ import { ILesson } from '../models/models';
 })
 export class LessonCardComponent {
   @Input() cardData: ILesson;
-
-  @Output() onCardDeleted = new EventEmitter();
-
-  constructor(
-    private _router: Router
-  ) {}
+  @Output() onCardEvent = new EventEmitter();
 
   editClickHandler(): void {
-    this._router.navigate(['/lesson', this.cardData.id]);
+    this.onCardEvent.emit({ action: 'edit', cardId: this.cardData.id});
   }
 
   deleteClickHandler(): void {
-    this.onCardDeleted.emit({ cardId: this.cardData.id});
+    this.onCardEvent.emit({ action: 'delete', cardId: this.cardData.id});
   }
 }

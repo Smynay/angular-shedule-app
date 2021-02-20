@@ -45,10 +45,18 @@ export class SheduleColumnComponent implements OnInit {
     }
   }
 
-  deleteCardHandler({cardId}): void {
-    if (confirm('Действительно удалить?')) {
-      this._storage.deleteLessonCard(cardId);
-      this.loadDataFromStorage();
+  cardEventsHandler({action, cardId}): void {
+    switch (action){
+      case 'edit':
+        this._router.navigate(['/lesson', cardId]);
+        break;
+
+      case 'delete':
+        if (confirm('Действительно удалить?')) {
+          this._storage.deleteLessonCard(cardId);
+          this.loadDataFromStorage();
+        }
+        break;
     }
   }
 }

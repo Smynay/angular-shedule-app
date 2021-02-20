@@ -7,7 +7,7 @@
     >
       <app-lesson-card
         [cardData]="cardsData[i]"
-        (onCardDeleted)="deleteCardHandler($event)"
+        (onCardEvent)="cardEventsHandler($event)"
       ></app-lesson-card>
     </div>
   </div>
