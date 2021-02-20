@@ -57,6 +57,11 @@ export class GlobalStorageService {
     ] = cardData;
   }
 
+  changeLessonCardColumnById(cardId: number, columnId: number): void {
+    let updatedCard = { ...this._lessonsStorage.find((lesson) => lesson.id == cardId), columnId };
+    this._lessonsStorage[this._lessonsStorage.findIndex((lesson) => lesson.id == cardId)] = updatedCard;
+  }
+
   createNewLessonCard(cardData: ILesson): void {
     this._lessonsStorage.push({ ...cardData, id: getRandomId() });
   }

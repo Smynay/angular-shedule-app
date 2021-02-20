@@ -52,7 +52,7 @@ export class SheduleColumnComponent implements OnInit {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<ILesson[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -61,6 +61,11 @@ export class SheduleColumnComponent implements OnInit {
       );
 
     } else {
+      const cardId = event.previousContainer.data[event.previousIndex].id;
+      const newColumnId = +event.container.id.slice(-1);
+
+      this._storage.changeLessonCardColumnById(cardId, newColumnId);
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

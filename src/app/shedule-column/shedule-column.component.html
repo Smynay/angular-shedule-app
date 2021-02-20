@@ -2,6 +2,7 @@
   <h2 class="mat-subheading-2 text-center mb-2">{{ columnData.title }}</h2>
   <div
     cdkDropList
+    id="{{ 'column-' + columnData.id }}"
     class="column__list flex-grow-1"
     [cdkDropListData]="cardsData"
     (cdkDropListDropped)="drop($event)"
