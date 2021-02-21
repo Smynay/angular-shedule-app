@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GlobalStorageService } from '../services/globalStorage.service';
+import { ApiService } from '../services/api.service';
 import { IColumn } from '../models/models';
 
 @Component({
@@ -8,16 +8,18 @@ import { IColumn } from '../models/models';
   templateUrl: './shedule.component.html',
   styleUrls: ['./shedule.component.scss'],
 })
+
 export class SheduleComponent implements OnInit {
-  columnsData: IColumn[];
+    scheduleColumns: IColumn[];
 
-  constructor(private _storage: GlobalStorageService) {}
+    constructor(private _apiService: ApiService) {}
 
-  ngOnInit(): void {
-    this.loadDataFromStorage();
-  }
+    async ngOnInit() {
+        await this.loadDataFromStorage();
+    }
 
-  loadDataFromStorage(): void {
-    this.columnsData = this._storage.getColumnsStorage();
-  }
+    async loadDataFromStorage() {
+        // maybe load scheduleColums with card
+        this.scheduleColumns = await this._apiService.getScheduleColumns();
+    }
 }

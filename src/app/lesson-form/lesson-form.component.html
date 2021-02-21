@@ -31,15 +31,14 @@
 
         <p class="mat-subheading-2 mb-0 text-center">Участники</p>
         <div class="card__members d-flex flex-wrap justify-content-around">
-          <mat-form-field
+          <mat-form-field 
             class="example-full-width"
-            *ngFor="let surname of form.members; let i = index"
+            *ngFor="let member of form.members; let i = index"
           >
             <mat-label>Участник {{ i + 1 }}</mat-label>
             <input
               matInput
-              [value]="surname"
-              (change)="changeValueHandler($event, i)"
+              [(ngModel)]="member.name" name="name{{i}}"
             />
           </mat-form-field>
 

@@ -1,7 +1,7 @@
 export interface ILesson {
   id: number,
   time: string;
-  members: string[];
+  members: IMember[];
   color: string;
   columnId: number;
 }
@@ -9,4 +9,8 @@ export interface ILesson {
 export interface IColumn {
   id: number;
   title: string;
+}
+
+export interface IMember {
+	name: string;
 }

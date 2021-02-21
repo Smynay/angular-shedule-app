@@ -4,8 +4,8 @@
     <div cdkDropListGroup class="board__columns d-flex flex-grow-1">
       <app-shedule-column
         class="board__column"
-        *ngFor="let columnData of columnsData; let i = index"
-        [columnId]="columnData.id"
+        *ngFor="let column of scheduleColumns"
+        [column]="column"
       ></app-shedule-column>
     </div>
   </div>

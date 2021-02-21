@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { AppMaterialModule } from '../app-material/app-material.module';
+import { FormsModule } from '@angular/forms';
 
 import { LessonCardComponent } from '../lesson-card/lesson-card.component';
 import { SheduleComponent } from '../shedule/shedule.component';
@@ -16,6 +17,6 @@ const Components = [
 
 @NgModule({
   declarations: [ Components ],
-  imports: [ AppMaterialModule ]
+  imports: [ AppMaterialModule, FormsModule ]
 })
 export class AppComponentsModule { }

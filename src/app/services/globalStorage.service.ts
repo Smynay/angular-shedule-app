@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 
-import { ILesson, IColumn } from '../models/models';
+import { ILesson, IColumn, IMember } from '../models/models';
 import { getRandomId } from '../utils/randomId';
 
 @Injectable({
   providedIn: 'root',
 })
+
+//TODO: this should be not used anywhere except ApiService
 export class GlobalStorageService {
   _lessonsStorage: ILesson[] = [
     {
       id: 0,
       time: '16:20',
       members: [
-        'Абрамович',
-        'Рохманов',
-        'Куфман',
-        'Чирингашвили',
-        'Кочубор',
-        'Сташешен',
-        'Максим',
-        'Брахманчук',
-        'Игнатьева'
+        {name :'Абрамович'},
+        {name :'Рохманов'},
+        {name :'Куфман'},
+        {name :'Чирингашвили'},
+        {name :'Кочубор'},
+        {name :'Сташешен'},
+        {name :'Максим'},
+        {name :'Брахманчук'},
+        {name :'Игнатьева'},
       ],
       color: 'blue',
       columnId: 0,
@@ -28,14 +30,22 @@ export class GlobalStorageService {
     {
       id: 1,
       time: '16:20',
-      members: ['Demian', 'Erick', 'Fedor'],
+      members: [
+        {name: 'Demian'},
+        {name: 'Erick'},
+        {name: 'Fedor'}
+      ],
       color: 'grey',
       columnId: 1,
     },
     {
       id: 2,
       time: '16:20',
-      members: ['George', 'Harold', 'Shindler'],
+      members: [
+        {name: 'George' },
+        {name: 'Harold' },
+        {name: 'Shindler'}
+      ],
       color: 'pink',
       columnId: 2,
     },
@@ -66,7 +76,7 @@ export class GlobalStorageService {
     this._lessonsStorage.push({ ...cardData, id: getRandomId() });
   }
 
-  deleteLessonCard(cardId: number): void {
+  deleteLessonCard(cardId: number) {
     this._lessonsStorage.splice(
       this._lessonsStorage.findIndex((lesson) => lesson.id == cardId), 1
     );
@@ -86,5 +96,9 @@ export class GlobalStorageService {
 
   getLessonCardById(cardId: number): ILesson {
     return this._lessonsStorage.find((lesson) => lesson.id == cardId);
+  }
+
+  getCardsByColumnId(columnId: number): ILesson[] {
+    return this._lessonsStorage.filter(x => x.columnId == columnId);
   }
 }
