@@ -1,39 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ILesson } from '../types/types';
-import { GlobalStorageService } from './../globalStorage.service';
+import { ILesson } from '../models/models';
 
 @Component({
   selector: 'app-lesson-card',
   templateUrl: './lesson-card.component.html',
   styleUrls: ['./lesson-card.component.scss'],
 })
-export class LessonCardComponent implements OnInit {
+export class LessonCardComponent {
   @Input() cardData: ILesson;
-  @Input() cardIndex: number;
-  @Input() columnIndex: number;
+  @Output() onCardEvent = new EventEmitter();
 
-  @Output() onCardDeleted = new EventEmitter();
-
-  constructor(private _router: Router, private _storage: GlobalStorageService) {}
-
-  ngOnInit(): void {
+  editClickHandler(): void {
+    this.onCardEvent.emit({ action: 'edit', cardId: this.cardData.id});
   }
 
-  editClickHandler() {
-    this._router.navigate(['/lesson', this.cardIndex]);
-  }
-
-  deleteClickHandler(){
-    if(confirm('Действительно удалить?')){
-      this._storage.deleteLessonCardFromColumnByIds(this.columnIndex, this.cardIndex);
-      this.onCardDeleted.emit(null)
-    }
-
-    console.log('card');
-
-    console.log( this._storage.getColumnStorageById(this.columnIndex));
-
+  deleteClickHandler(): void {
+    this.onCardEvent.emit({ action: 'delete', cardId: this.cardData.id});
   }
 }

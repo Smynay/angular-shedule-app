@@ -1,19 +1,12 @@
 <div class="board d-flex flex-grow-1 flex-column">
   <div class="board__bar"><h1 class="text-center">Расписание</h1></div>
   <div class="board__wrapper d-flex flex-grow-1">
-    <div class="board__columns d-flex flex-grow-1">
+    <div cdkDropListGroup class="board__columns d-flex flex-grow-1">
       <app-shedule-column
         class="board__column"
         *ngFor="let columnData of columnsData; let i = index"
-        [columnIndex]="i"
-        (onColumnDeleted)="loadDataFromStorage()"
+        [columnId]="columnData.id"
       ></app-shedule-column>
-      <div class="board__column d-flex align-items-center justify-content-around">
-        <button mat-button color="accent" (click)="addColumnHandler()">
-          <mat-icon>add_circle</mat-icon>
-          <span class="ml-1">Добавить колонку</span>
-        </button>
-      </div>
     </div>
   </div>
 </div>

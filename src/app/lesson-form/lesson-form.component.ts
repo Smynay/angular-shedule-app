@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { GlobalStorageService } from '../globalStorage.service';
-import { ILesson } from '../types/types';
+import { GlobalStorageService } from '../services/globalStorage.service';
+import { ILesson } from '../models/models';
 
 @Component({
   selector: 'app-lesson-form',
@@ -17,9 +17,11 @@ export class LessonFormComponent implements OnInit {
   currentRoute: string;
 
   form: ILesson = {
+    id: 0,
     time: '',
     members: [''],
-    color: ''
+    color: '',
+    columnId: 0,
   };
 
   constructor(
@@ -30,41 +32,42 @@ export class LessonFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._route.url.subscribe((params) => this.currentRoute = params[0].path);
+    this.currentRoute = this._route.snapshot.url[0].path;
 
-    if(this.currentRoute != 'create'){
-      this._route.params.subscribe((params) => this.lessonId = params.id);
-      this.form = this._storage.getLessonCardByIndex(this.lessonId);
+    if (this.currentRoute != 'create') {
+      this.lessonId = this._route.snapshot.params.id;
+      this.form = this._storage.getLessonCardById(this.lessonId);
+
     } else {
-      this.lessonId = this._storage.getLessonCardLength();
-      this._route.params.subscribe((params) => this.columnId = params.columnId);
+      this.columnId = this._route.snapshot.params.columnId;
+      this.form.columnId = this.columnId;
     }
   }
 
-  backClickHandler() {
+  backClickHandler(): void {
     this._location.back();
   }
 
-  saveClickHandler() {
-    this._storage.setLessonCardByIndex(this.lessonId, this.form);
+  saveClickHandler(): void {
+    if (this.currentRoute != 'create') {
+      this._storage.changeLessonCardById(this.form.id, this.form);
 
-    if(this.currentRoute == 'create'){
-      this._storage.addLessonCardIndexToColumn(this.columnId, this.lessonId);
-
+    } else {
+      this._storage.createNewLessonCard(this.form);
     }
 
     this._router.navigate(['/shedule']);
   }
 
-  changeTimeHandler({ target }) {
+  changeTimeHandler({ target }: any) {
     this.form.time = target.value;
   }
 
-  changeValueHandler({ target }, id) {
+  changeValueHandler({ target }: any, id: number) {
     this.form.members[id] = target.value;
   }
 
-  addMemberHandler() {
+  addMemberHandler(): void {
     event.preventDefault();
 
     if (this.checkMembers()) {
@@ -76,7 +79,7 @@ export class LessonFormComponent implements OnInit {
     }
   }
 
-  checkMembers() {
+  checkMembers(): boolean {
     let members = this.form.members.concat();
 
     if (this.checkMembersCount(members, 11)) {
@@ -90,7 +93,7 @@ export class LessonFormComponent implements OnInit {
     return true;
   }
 
-  checkMembersCount(membersArr, validCount) {
+  checkMembersCount(membersArr: string[], validCount: number): boolean {
     if (membersArr.length > validCount - 1) {
       return true;
     }

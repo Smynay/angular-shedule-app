@@ -1,27 +1,19 @@
 <div class="column">
-  <div class="column__title d-flex justify-content-between align-items-center mb-1">
-    <h2 class="mat-subheading-2 text-center mb-0">{{ columnData.title }}</h2>
-    <div>
-      <button mat-icon-button color="accent" (click)="editColumnTitleHandler()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="deleteColumnHandler()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="column__list flex-grow-1">
-    <div
-      class="column__item"
-      *ngFor="let cardIndex of columnData.cardsIndexes; let i = index"
-    >
-      <app-lesson-card
-        [cardData]="cardsData[i]"
-        [cardIndex]="cardIndex"
-        [columnIndex]="columnIndex"
-        (onCardDeleted)="refreshColumnData()"
-      ></app-lesson-card>
-    </div>
+  <h2 class="mat-subheading-2 text-center mb-2">{{ columnData.title }}</h2>
+  <div
+    cdkDropList
+    id="{{ 'column-' + columnData.id }}"
+    class="column__list flex-grow-1"
+    [cdkDropListData]="cardsData"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <app-lesson-card
+      cdkDrag
+      class="list__item"
+      *ngFor="let card of cardsData; let i = index"
+      [cardData]="cardsData[i]"
+      (onCardEvent)="cardEventsHandler($event)"
+    ></app-lesson-card>
   </div>
 
   <button
